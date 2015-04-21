@@ -19,6 +19,7 @@ Prerequisites
 -----
 
 * Java 1.7
+* Or Docker
 
 
 Build Application
@@ -32,7 +33,11 @@ Run Application
 
 Start application locally with
 
-  java -cp target/scala-2.11/socialcrowd.jar com.flurdy.socialcrowd.Launcher
+   ./socialcrowd
+
+Or with Docker
+
+   docker run -ti --rm . 
 
 
 Post Messages

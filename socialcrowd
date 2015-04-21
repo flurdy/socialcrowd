@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+JAVA_OPTS="-Xms512m -Xmx1024m"
+APP_LOG_CONFIG=src/main/resources/logback.xml
+APP_CONFIG=src/main/resources/application.conf
+APP_CLASSPATH="target/scala-2.11/socialcrowd.jar"
+APP_CLASS=com.flurdy.socialcrowd.Launcher
+
+JAVA_OPTS="-Dconfig.file=${APP_CONFIG} -Dlogback.configurationFile=${APP_LOG_CONFIG} ${JAVA_OPTS}"
+
+/usr/bin/java -cp ${APP_CLASSPATH} ${JAVA_OPTS} ${APP_CLASS}
