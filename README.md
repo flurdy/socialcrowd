@@ -80,9 +80,20 @@ Assumptions
 * No emoji, or odd UTF encoding
 * No multiline input
 * Names can not have space or characters in them
+* If you follow a friends that does not exist - that friend will be created
 
 
+Improvements
+----
 
+* Either or Scalaz validation 
+* Akka if needs to scale horizontally and reactive
+* Akka streams if posts/wall are large 
+* Separate apps for input layer, reading and member posts persistance
+* Test Launcher and InputReader
+* Test with ScalaCheck
+* Use injection via cake pattern, ReaderT, etc.
+* Etc
 
 
 

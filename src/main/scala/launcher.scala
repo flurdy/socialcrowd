@@ -2,13 +2,11 @@ package com.flurdy.socialcrowd
 
 import io.Source
 import util.control.Breaks._
+import com.flurdy.socialcrowd.output._
 
+object InputReader {
 
-object Launcher extends App {
-
-   val socialCrowd = new SocialCrowd
-
-   def readInput = {
+   def readAndProcessInput(socialCrowd: SocialCrowd) = {
       breakable {
          for(line <- Source.stdin.getLines){
             if(line == "" || line == ".") break
@@ -16,10 +14,17 @@ object Launcher extends App {
          }
       }
    }
+
+}
+
+object Launcher extends App {
+
+   val crowdOutput = new StandardCrowdOutput
+   val socialCrowd = new SocialCrowd(crowdOutput)
    
    println("Welcome to Social Crowd")
 
-   readInput
+   InputReader.readAndProcessInput(socialCrowd)
 
    println("End of Social Crowd")
 
