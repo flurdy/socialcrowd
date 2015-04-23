@@ -32,6 +32,24 @@ class InMemoryMemberRepositorySpec extends Specification {
          val member = repository.findOrCreateMember("Me")
 
          member.memberName must beEqualTo("Me")
+      }      
+
+      "find members in lowercase" in {
+         val repository = new InMemoryMemberRepository
+
+         repository.findOrCreateMember("Me")
+         val remember = repository.findMember("ME")
+
+         remember must beSome
+      }
+
+      "create members in lowercase" in {
+         val repository = new InMemoryMemberRepository
+
+         repository.createMember("Me")
+         val remember = repository.findMember("me")
+
+         remember must beSome
       }
 
    }

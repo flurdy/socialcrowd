@@ -9,7 +9,7 @@ assemblyJarName in assembly := "socialcrowd.jar"
 mainClass in assembly := Some("com.flurdy.socialcrowd.Launcher")
 
 libraryDependencies ++= Seq(
-    "org.specs2"     %% "specs2"          % "2.3.12" % "test",
+    "org.specs2"     %% "specs2"          % "2.4.1" % "test",
     "org.mockito"    %  "mockito-core"    % "1.9.5"  % "test",
     "ch.qos.logback" %  "logback-classic" % "1.1.1", 
     "joda-time"      %  "joda-time"       % "2.3",    

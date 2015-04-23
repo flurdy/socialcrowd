@@ -80,7 +80,7 @@ Assumptions
 * No emoji, or odd UTF encoding
 * No multiline input
 * Names can not have space or characters in them
-* If you follow a friends that does not exist - that friend will be created
+* If you follow a friend that does not exist - that friend will be created
 
 
 Improvements
