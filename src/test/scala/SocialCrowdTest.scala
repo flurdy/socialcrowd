@@ -5,6 +5,8 @@ import org.specs2.mutable._
 import org.specs2.specification._
 import org.specs2.mock.Mockito
 import com.flurdy.socialcrowd.output._
+import com.flurdy.socialcrowd.infrastructure._
+import com.flurdy.socialcrowd.model._
 
 
 class SocialCrowdSpec extends Specification with Mockito {
@@ -13,7 +15,8 @@ class SocialCrowdSpec extends Specification with Mockito {
 
       "process input and call output" in {
          val output      = mock[CrowdOutput]
-         val socialCrowd = new SocialCrowd(output)
+         val repository  = mock[SocialMemberRepository]
+         val socialCrowd = new SocialCrowd(output,repository)
 
          socialCrowd.processInput("Hello World")
 
@@ -22,7 +25,8 @@ class SocialCrowdSpec extends Specification with Mockito {
 
       "not allow empty input" in {
          val output      = mock[CrowdOutput]
-         val socialCrowd = new SocialCrowd(output)
+         val repository  = mock[SocialMemberRepository]
+         val socialCrowd = new SocialCrowd(output,repository)
 
          socialCrowd.processInput("")
 

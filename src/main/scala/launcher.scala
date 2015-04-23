@@ -3,6 +3,7 @@ package com.flurdy.socialcrowd
 import io.Source
 import util.control.Breaks._
 import com.flurdy.socialcrowd.output._
+import com.flurdy.socialcrowd.infrastructure._
 
 object InputReader {
 
@@ -19,8 +20,9 @@ object InputReader {
 
 object Launcher extends App {
 
-   val crowdOutput = new StandardCrowdOutput
-   val socialCrowd = new SocialCrowd(crowdOutput)
+   private val crowdOutput      = new StandardCrowdOutput
+   private val memberRepository = new InMemoryMemberRepository
+   private val socialCrowd      = new SocialCrowd(crowdOutput,memberRepository)
    
    println("Welcome to Social Crowd")
 
