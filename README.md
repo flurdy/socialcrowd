@@ -80,15 +80,15 @@ Assumptions
 
 * Happy sunny day input only
 * Upper & lower case irrelevant
-* No emoji, or odd UTF encoding
+* No emoji or odd UTF encoding
 * No multiline input
-* Names can not have space or characters in them
-* If you follow a friend that does not exist - that friend will be created
+* Names can not have white space characters in them
 
 
 Improvements
 ----
 
+* Cleaner Launcher and SocialProcessor classes
 * Either or Scalaz validation 
 * Akka if needs to scale horizontally and reactive
 * Akka streams if posts/wall are large 

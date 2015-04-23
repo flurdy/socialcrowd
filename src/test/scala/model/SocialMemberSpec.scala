@@ -33,6 +33,16 @@ class SocialMemberSpec extends Specification {
          member.friends must not be empty
       }
       
+      "follow action ignore adding yourself to friends" in {
+         val member = new SocialMember("Alice")
+
+         member.friends must be empty
+
+         member.follows(member)
+
+         member.friends must be empty
+      }
+      
       "read posts action responds with members post" in {
          val member = new SocialMember("Alice")
 

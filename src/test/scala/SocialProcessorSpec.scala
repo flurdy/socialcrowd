@@ -43,10 +43,11 @@ class SocialProcessorSpec extends Specification with Mockito {
          val member      = new SocialMember("Alice")
          val processor   = new SocialProcessor(output,repository)
          repository.findOrCreateMember("Alice") returns member
+         repository.findMember("Peter") returns None
 
          processor.processInput("Alice follows Peter")
 
-         there was one(repository).findOrCreateMember("Peter")
+         there was one(repository).findMember("Peter")
       }
 
       "follows action adds friend to member" in {
@@ -56,7 +57,7 @@ class SocialProcessorSpec extends Specification with Mockito {
          val friend      = new SocialMember("Peter")
          val processor   = new SocialProcessor(output,repository)
          repository.findOrCreateMember("Alice") returns member
-         repository.findOrCreateMember("Peter") returns friend
+         repository.findMember("Peter") returns Some(friend)
          member.memberName returns "Alice"
 
          processor.processInput("Alice follows Peter")
@@ -77,18 +78,18 @@ class SocialProcessorSpec extends Specification with Mockito {
          there was no(member).follows(any[SocialMember])
       }
 
-      "follows yourself is ignored" in {
+      "follows yourself is ignored elsewhere" in {
          val output      = mock[CrowdOutput]
          val repository  = mock[SocialMemberRepository]
          val member      = mock[SocialMember]
          val processor   = new SocialProcessor(output,repository)
          repository.findOrCreateMember("Alice") returns member
+         repository.findMember("Alice") returns Some(member)
          member.memberName returns "Alice"
 
          processor.processInput("Alice follows Alice")
 
-         there was no(member).follows(any[SocialMember])
-         there was one(output).printLine("Error: Ignored following yourself")
+         there was one(member).follows(any[SocialMember])
       }
 
       "wall action looks for member and friends wall posts" in {
