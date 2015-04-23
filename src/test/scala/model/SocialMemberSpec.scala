@@ -3,7 +3,9 @@ package com.flurdy.socialcrowd.model
 import org.specs2.mutable._
 import org.specs2.specification._
 import org.joda.time.DateTime
+import org.joda.time.Duration
 import com.flurdy.socialcrowd.model._
+import util.Random
 
 
 class SocialMemberSpec extends Specification {
@@ -101,6 +103,22 @@ class SocialMemberSpec extends Specification {
          output(4) must be equalTo("Alice - Hello Third World (10 minutes ago)")
       }
       
+      "return a lot of ordered wall posts" in {
+         val member = new SocialMember("Alice")
+         for (minute <- Seq.fill(50000)(Random.nextInt(50000))){
+            member.postMessage(
+               new SocialMessage(
+                  "Alice",s"Hello World $minute", 
+                  DateTime.now.minusSeconds(minute)))
+         }
+         val before   = DateTime.now
+         val output   = member.showWall.map(_.wallPost)
+         val after    = DateTime.now
+         val duration = new Duration(before,after)
+         output must not be empty
+         duration.getStandardSeconds() must beLessThan(3L)
+      }
+
    }
 
 }
