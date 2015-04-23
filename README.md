@@ -7,12 +7,11 @@ A command line social messaging and feed framework.
 
 * Members can post messages
 * Follow other friends
-* Read their friends messages
-* Read a 'wall' feed of messages
-** Wall includes their own messages
-** And messages from the friends they follow
-** Messages are sorted by time and date
-
+* Read a member's messages
+* Read a member's 'wall', a feed of messages
+* * Wall includes the member's own messages
+* * And messages from the friends they follow
+* * Messages are sorted by time and date
 
 
 Prerequisites
@@ -27,6 +26,10 @@ Build Application
 
    ./activator assembly
 
+Or with Docker
+   
+   docker build -t flurdy/socialcrowd:0.1 .
+
 
 Run Application
 ---
@@ -37,7 +40,7 @@ Start application locally with
 
 Or with Docker
 
-   docker run -ti --rm . 
+   docker run -ti --rm flurdy/socialcrowd:0.1 
 
 
 Post Messages
@@ -51,7 +54,7 @@ Post Messages
 Follow Friends
 -----
 
-   Alice follow Peter
+   Alice follows Peter
 
 
 Read Alice's Messages

@@ -4,7 +4,7 @@ import org.joda.time.{DateTime,Period}
 import org.joda.time.format.PeriodFormatterBuilder
 
 
-object SocialMessage {
+object RelativeTime {
 
    private val secondsFormatter = new PeriodFormatterBuilder().
          appendSeconds().appendSuffix(" seconds ago").toFormatter();
@@ -15,7 +15,7 @@ object SocialMessage {
    private val daysFormatter = new PeriodFormatterBuilder().
          appendDays().appendSuffix(" days ago").toFormatter();
 
-   def relativeFormat(then: DateTime): String = {
+   def format(then: DateTime): String = {
       val now = DateTime.now
       if(now.minusSeconds(1).isBefore(then))      "now"
       else if(now.minusMinutes(1).isBefore(then)) secondsFormatter.print(new Period(then,now))
@@ -30,7 +30,7 @@ class SocialMessage(memberName: String, message: String, val timestamp: DateTime
 
    def this(memberName: String, message: String) = this(memberName, message, DateTime.now)
    
-   def toFormattedTimestamp = SocialMessage.relativeFormat(timestamp)
+   def toFormattedTimestamp = RelativeTime.format(timestamp)
    
    def messagePost = s"$message ($toFormattedTimestamp)"
 
