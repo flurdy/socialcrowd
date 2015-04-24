@@ -2,6 +2,8 @@
 Social Crowd
 ======
 
+https://github.com/flurdy/socialcrowd
+
 
 A command line social messaging and feed framework.
 
@@ -100,6 +102,5 @@ Improvements
 
 
 
-
-
+There is a Java alternative at https://github.com/flurdy/socialbeancrowd
 

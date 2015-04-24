@@ -7,21 +7,31 @@ import org.joda.time.format.PeriodFormatterBuilder
 object RelativeTime {
 
    private val secondsFormatter = new PeriodFormatterBuilder().
-         appendSeconds().appendSuffix(" seconds ago").toFormatter();
+         appendSeconds().appendSuffix(" second ago"," seconds ago").toFormatter();
    private val minutesFormatter = new PeriodFormatterBuilder().
-         appendMinutes().appendSuffix(" minutes ago").toFormatter();
+         appendMinutes().appendSuffix(" minute ago"," minutes ago").toFormatter();
    private val hoursFormatter = new PeriodFormatterBuilder().
-         appendHours().appendSuffix(" hours ago").toFormatter();
+         appendHours().appendSuffix(" hour ago"," hours ago").toFormatter();
    private val daysFormatter = new PeriodFormatterBuilder().
-         appendDays().appendSuffix(" days ago").toFormatter();
+         appendDays().appendSuffix(" day ago"," days ago").toFormatter();
+   private val weeksFormatter = new PeriodFormatterBuilder().
+         appendWeeks().appendSuffix(" week ago"," weeks ago").toFormatter();
+   private val monthsFormatter = new PeriodFormatterBuilder().
+         appendMonths().appendSuffix(" month ago"," months ago").toFormatter();
+   private val yearsFormatter = new PeriodFormatterBuilder().
+         appendYears().appendSuffix(" year ago"," years ago").toFormatter();
 
    def format(then: DateTime): String = {
       val now = DateTime.now
+      val relativePeriod = new Period(then,now)
       if(now.minusSeconds(1).isBefore(then))      "now"
-      else if(now.minusMinutes(1).isBefore(then)) secondsFormatter.print(new Period(then,now))
-      else if(now.minusHours(1).isBefore(then))   minutesFormatter.print(new Period(then,now))
-      else if(now.minusDays(1).isBefore(then))    hoursFormatter.print(new Period(then,now))
-      else daysFormatter.print(new Period(then,now))
+      else if(now.minusMinutes(1).isBefore(then)) secondsFormatter.print(relativePeriod)
+      else if(now.minusHours(1).isBefore(then))   minutesFormatter.print(relativePeriod)
+      else if(now.minusDays(1).isBefore(then))    hoursFormatter.print(relativePeriod)
+      else if(now.minusWeeks(1).isBefore(then))   daysFormatter.print(relativePeriod)
+      else if(now.minusMonths(1).isBefore(then))  weeksFormatter.print(relativePeriod)
+      else if(now.minusYears(1).isBefore(then))   monthsFormatter.print(relativePeriod)
+      else yearsFormatter.print(relativePeriod)
    }
 
 }
